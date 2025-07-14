@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { ConvexClient, ConvexClientOptions } from 'convex/browser';
 
-export const CONVEX_CLIENT = new InjectionToken<ConvexClient>('CONVEX_CLIENT');
+export const CONVEX = new InjectionToken<ConvexClient>('CONVEX');
 
 function convexClientFactory(convexUrl: string, options?: ConvexClientOptions) {
   const destroyRef = inject(DestroyRef);
@@ -20,7 +20,7 @@ export function provideConvex(
   options?: ConvexClientOptions,
 ): FactoryProvider {
   return {
-    provide: CONVEX_CLIENT,
+    provide: CONVEX,
     useFactory: () => convexClientFactory(convexUrl, options),
   };
 }
