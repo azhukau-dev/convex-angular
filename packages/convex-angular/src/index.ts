@@ -1,1 +1,1 @@
-export * from './lib/convex-angular';
+export * from './lib/convex';

@@ -7,7 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@nx/angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/todo",
@@ -20,10 +20,17 @@
             "input": "apps/todo/public"
           }
         ],
-        "styles": ["apps/todo/src/styles.css"]
+        "styles": ["apps/todo/src/styles.css"],
+        "plugins": ["apps/todo/plugins/env-var-plugin.js"]
       },
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/todo/src/environments/environment.ts",
+              "with": "apps/todo/src/environments/environment.prod.ts"
+            }
+          ],
           "budgets": [
             {
               "type": "initial",
@@ -48,7 +55,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular/build:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "todo:build:production"
@@ -60,7 +67,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular/build:extract-i18n",
+      "executor": "@nx/angular:extract-i18n",
       "options": {
         "buildTarget": "todo:build"
       }
