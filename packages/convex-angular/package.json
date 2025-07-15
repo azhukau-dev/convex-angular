@@ -2,9 +2,8 @@
   "name": "convex-angular",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^20.1.0",
     "@angular/core": "^20.1.0",
-    "convex": "^1.25.2"
+    "convex": "^1.25.4"
   },
   "sideEffects": false
 }
