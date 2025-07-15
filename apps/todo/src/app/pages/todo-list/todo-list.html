@@ -1,0 +1,33 @@
+<div class="mx-auto max-w-xl p-4">
+  <ul class="list bg-base-100 rounded-box shadow-md">
+    @for (item of todos.data(); track $index) {
+      <li class="list-row">
+        <div class="text-4xl font-thin tabular-nums opacity-30">
+          {{ $index + 1 }}
+        </div>
+        <div class="list-col-grow">
+          <div>{{ item.title }}</div>
+          <div class="text-xs font-semibold uppercase opacity-60">
+            {{ item.description }}
+          </div>
+        </div>
+        <button class="btn btn-square btn-ghost">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </button>
+      </li>
+    }
+  </ul>
+</div>

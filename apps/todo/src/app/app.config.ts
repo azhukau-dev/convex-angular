@@ -6,8 +6,8 @@ import {
 import { provideRouter } from '@angular/router';
 import { provideConvex } from 'convex-angular';
 
+import { environment } from '../environments/environment';
 import { appRoutes } from './app.routes';
-import { environment } from './environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [

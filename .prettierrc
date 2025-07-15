@@ -17,5 +17,13 @@
   ],
   "importOrderParserPlugins": ["typescript", "decorators-legacy"],
   "importOrderTypeScriptVersion": "5.8.3",
-  "importOrderCaseSensitive": true
+  "importOrderCaseSensitive": true,
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }
