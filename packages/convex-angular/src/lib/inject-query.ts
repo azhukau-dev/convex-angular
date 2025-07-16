@@ -6,7 +6,11 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { FunctionReference, FunctionReturnType } from 'convex/server';
+import {
+  FunctionReference,
+  FunctionReturnType,
+  getFunctionName,
+} from 'convex/server';
 
 import { injectConvex } from './inject-convex';
 
@@ -29,7 +33,9 @@ export function injectQuery<Query extends FunctionReference<'query'>>(
   const convex = injectConvex();
   const destroyRef = inject(DestroyRef);
 
-  const data = signal<FunctionReturnType<Query>>(undefined);
+  const data = signal<FunctionReturnType<Query>>(
+    convex.client.localQueryResult(getFunctionName(query), argsFn()),
+  );
   const error = signal<Error | undefined>(undefined);
   const isLoading = signal(false);
 
