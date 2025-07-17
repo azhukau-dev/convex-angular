@@ -8,15 +8,15 @@ import {
 
 import { injectConvex } from './inject-convex';
 
-export type MutationFunctionReference = FunctionReference<'mutation'>;
+export type MutationReference = FunctionReference<'mutation'>;
 
-export interface MutationOptions<Mutation extends MutationFunctionReference> {
+export interface MutationOptions<Mutation extends MutationReference> {
   onSuccess?: (data: FunctionReturnType<Mutation>) => void;
   onError?: (err: Error) => void;
   optimisticUpdate?: OptimisticUpdate<FunctionArgs<Mutation>>;
 }
 
-export interface MutationResult<Mutation extends MutationFunctionReference> {
+export interface MutationResult<Mutation extends MutationReference> {
   mutate: (
     args: FunctionArgs<Mutation>,
   ) => Promise<FunctionReturnType<Mutation>>;
@@ -25,7 +25,7 @@ export interface MutationResult<Mutation extends MutationFunctionReference> {
   isLoading: Signal<boolean>;
 }
 
-export function injectMutation<Mutation extends MutationFunctionReference>(
+export function injectMutation<Mutation extends MutationReference>(
   mutation: Mutation,
   options?: MutationOptions<Mutation>,
 ): MutationResult<Mutation> {
