@@ -1,0 +1,52 @@
+import { assertInInjectionContext, signal } from '@angular/core';
+import { FunctionReference, FunctionReturnType } from 'convex/server';
+
+import { injectConvex } from './inject-convex';
+
+export interface ActionOptions<Action extends FunctionReference<'action'>> {
+  onSuccess?: (data: FunctionReturnType<Action>) => void;
+  onError?: (err: Error) => void;
+}
+
+export function injectAction<Action extends FunctionReference<'action'>>(
+  action: Action,
+  options?: ActionOptions<Action>,
+) {
+  assertInInjectionContext(injectAction);
+  const convex = injectConvex();
+
+  const error = signal<Error | undefined>(undefined);
+  const isLoading = signal(false);
+
+  const reset = () => {
+    error.set(undefined);
+    isLoading.set(false);
+  };
+
+  const run = async (
+    args: Action['_args'],
+  ): Promise<FunctionReturnType<Action>> => {
+    try {
+      reset();
+
+      isLoading.set(true);
+
+      const result = await convex.action(action, args);
+      options?.onSuccess?.(result);
+      return result;
+    } catch (err) {
+      const errorObj = err instanceof Error ? err : new Error(String(err));
+      error.set(errorObj);
+      options?.onError?.(errorObj);
+      return undefined;
+    } finally {
+      isLoading.set(false);
+    }
+  };
+
+  return {
+    run,
+    error: error.asReadonly(),
+    isLoading: isLoading.asReadonly(),
+  };
+}

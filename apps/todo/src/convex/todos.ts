@@ -1,6 +1,6 @@
 import { v } from 'convex/values';
 
-import { mutation, query } from './_generated/server';
+import { internalMutation, mutation, query } from './_generated/server';
 
 export const listTodos = query({
   args: {
@@ -29,5 +29,23 @@ export const reopenTodo = mutation({
   handler: async (ctx, args) => {
     const { id } = args;
     await ctx.db.patch(id, { completed: false });
+  },
+});
+
+export const completeAllTodos = internalMutation({
+  handler: async (ctx) => {
+    const items = await ctx.db.query('todos').collect();
+    for (const item of items) {
+      await ctx.db.patch(item._id, { completed: true });
+    }
+  },
+});
+
+export const reopenAllTodos = internalMutation({
+  handler: async (ctx) => {
+    const items = await ctx.db.query('todos').collect();
+    for (const item of items) {
+      await ctx.db.patch(item._id, { completed: false });
+    }
   },
 });

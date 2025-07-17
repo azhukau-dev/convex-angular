@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { injectMutation, injectQuery } from 'convex-angular';
+import { injectAction, injectMutation, injectQuery } from 'convex-angular';
 
 import { api } from '../../../convex/_generated/api';
 import { Id } from '../../../convex/_generated/dataModel';
@@ -24,11 +24,22 @@ export default class TodoList {
   readonly completeTodo = injectMutation(api.todos.completeTodo);
   readonly reopenTodo = injectMutation(api.todos.reopenTodo);
 
+  readonly completeAll = injectAction(api.todoFunctions.completeAllTodos);
+  readonly reopenAll = injectAction(api.todoFunctions.reopenAllTodos);
+
   handleTodoChange(id: Id<'todos'>, completed: boolean) {
     if (completed) {
       this.reopenTodo.mutate({ id });
     } else {
       this.completeTodo.mutate({ id });
     }
+  }
+
+  handleCompleteAll() {
+    this.completeAll.run({});
+  }
+
+  handleReopenAll() {
+    this.reopenAll.run({});
   }
 }
