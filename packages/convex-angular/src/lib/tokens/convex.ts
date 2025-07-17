@@ -8,7 +8,10 @@ import { ConvexClient, ConvexClientOptions } from 'convex/browser';
 
 export const CONVEX = new InjectionToken<ConvexClient>('CONVEX');
 
-function convexClientFactory(convexUrl: string, options?: ConvexClientOptions) {
+function convexClientFactory(
+  convexUrl: string,
+  options?: ConvexClientOptions,
+): ConvexClient {
   const destroyRef = inject(DestroyRef);
   const client = new ConvexClient(convexUrl, options);
   destroyRef.onDestroy(() => client.close());

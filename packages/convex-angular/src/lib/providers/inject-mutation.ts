@@ -1,4 +1,4 @@
-import { assertInInjectionContext, signal } from '@angular/core';
+import { Signal, assertInInjectionContext, signal } from '@angular/core';
 import { OptimisticUpdate } from 'convex/browser';
 import {
   FunctionArgs,
@@ -16,17 +16,28 @@ export interface MutationOptions<Mutation extends MutationFunctionReference> {
   optimisticUpdate?: OptimisticUpdate<FunctionArgs<Mutation>>;
 }
 
+export interface MutationResult<Mutation extends MutationFunctionReference> {
+  mutate: (
+    args: FunctionArgs<Mutation>,
+  ) => Promise<FunctionReturnType<Mutation>>;
+  data: Signal<FunctionReturnType<Mutation>>;
+  error: Signal<Error | undefined>;
+  isLoading: Signal<boolean>;
+}
+
 export function injectMutation<Mutation extends MutationFunctionReference>(
   mutation: Mutation,
   options?: MutationOptions<Mutation>,
-) {
+): MutationResult<Mutation> {
   assertInInjectionContext(injectMutation);
   const convex = injectConvex();
 
+  const data = signal<FunctionReturnType<Mutation>>(undefined);
   const error = signal<Error | undefined>(undefined);
   const isLoading = signal(false);
 
   const reset = () => {
+    data.set(undefined);
     error.set(undefined);
     isLoading.set(false);
   };
@@ -42,7 +53,7 @@ export function injectMutation<Mutation extends MutationFunctionReference>(
       const result = await convex.mutation(mutation, args, {
         optimisticUpdate: options?.optimisticUpdate,
       });
-
+      data.set(result);
       options?.onSuccess?.(result);
       return result;
     } catch (err) {
@@ -57,6 +68,7 @@ export function injectMutation<Mutation extends MutationFunctionReference>(
 
   return {
     mutate,
+    data: data.asReadonly(),
     error: error.asReadonly(),
     isLoading: isLoading.asReadonly(),
   };
