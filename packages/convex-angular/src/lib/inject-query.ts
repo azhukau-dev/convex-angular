@@ -14,17 +14,19 @@ import {
 
 import { injectConvex } from './inject-convex';
 
+export type QueryFunctionReference = FunctionReference<'query'>;
+
 export interface QueryOptions {
   enabled?: boolean;
 }
 
-export interface QueryResult<Query extends FunctionReference<'query'>> {
+export interface QueryResult<Query extends QueryFunctionReference> {
   data: Signal<FunctionReturnType<Query>>;
   error: Signal<Error | undefined>;
   isLoading: Signal<boolean>;
 }
 
-export function injectQuery<Query extends FunctionReference<'query'>>(
+export function injectQuery<Query extends QueryFunctionReference>(
   query: Query,
   argsFn: () => Query['_args'],
   optionsFn?: () => QueryOptions,

@@ -3,12 +3,14 @@ import { FunctionReference, FunctionReturnType } from 'convex/server';
 
 import { injectConvex } from './inject-convex';
 
-export interface ActionOptions<Action extends FunctionReference<'action'>> {
+export type ActionFunctionReference = FunctionReference<'action'>;
+
+export interface ActionOptions<Action extends ActionFunctionReference> {
   onSuccess?: (data: FunctionReturnType<Action>) => void;
   onError?: (err: Error) => void;
 }
 
-export function injectAction<Action extends FunctionReference<'action'>>(
+export function injectAction<Action extends ActionFunctionReference>(
   action: Action,
   options?: ActionOptions<Action>,
 ) {

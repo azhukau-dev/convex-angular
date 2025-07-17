@@ -8,15 +8,15 @@ import {
 
 import { injectConvex } from './inject-convex';
 
-export interface MutationOptions<
-  Mutation extends FunctionReference<'mutation'>,
-> {
+export type MutationFunctionReference = FunctionReference<'mutation'>;
+
+export interface MutationOptions<Mutation extends MutationFunctionReference> {
   onSuccess?: (data: FunctionReturnType<Mutation>) => void;
   onError?: (err: Error) => void;
   optimisticUpdate?: OptimisticUpdate<FunctionArgs<Mutation>>;
 }
 
-export function injectMutation<Mutation extends FunctionReference<'mutation'>>(
+export function injectMutation<Mutation extends MutationFunctionReference>(
   mutation: Mutation,
   options?: MutationOptions<Mutation>,
 ) {
