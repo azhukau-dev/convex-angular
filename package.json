@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev:todo": "nx serve todo",
-    "dev:api": "convex dev",
-    "build:todo": "nx build todo",
+    "dev:client": "nx serve todo",
+    "dev:server": "convex dev",
+    "build:client": "nx build todo",
     "build:library": "nx build convex-angular",
     "update": "nx migrate latest"
   },
