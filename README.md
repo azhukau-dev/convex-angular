@@ -1,8 +1,9 @@
-<p align="center">
-  <h2 align="center">convex-angular</h2>
+# convex-angular
 
-  <p align="center">The Angular client for Convex</p>
-</p>
+The Angular client for Convex.
+
+[![NPM version](https://img.shields.io/npm/v/convex-angular?color=limegreen&label=npm)](https://www.npmjs.com/package/convex-angular)
+[![NPM downloads](https://img.shields.io/npm/dm/convex-angular?color=limegreen&label=downloads)](https://www.npmjs.com/package/convex-angular)
 
 ## Getting Started
 
@@ -92,4 +93,4 @@ Contributions are welcome! Please feel free to submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/azhukau-dev/convex-angular/blob/main/LICENSE) file for details.
+[MIT](https://github.com/azhukau-dev/convex-angular/blob/main/LICENSE)
