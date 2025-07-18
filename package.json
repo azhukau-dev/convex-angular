@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev:client": "nx serve todo",
+    "dev:client": "nx serve client",
     "dev:server": "convex dev",
-    "build:client": "nx build todo",
+    "build:client": "nx build client",
     "build:library": "nx build convex-angular",
     "update": "nx migrate latest"
   },
@@ -18,8 +18,12 @@
     "@angular/platform-browser": "20.1.2",
     "@angular/platform-browser-dynamic": "20.1.2",
     "@angular/router": "20.1.2",
+    "@primeuix/themes": "1.2.1",
     "convex": "1.25.4",
+    "primeicons": "7.0.0",
+    "primeng": "20.0.0",
     "rxjs": "7.8.2",
+    "tailwindcss-primeui": "0.6.1",
     "zone.js": "0.15.1"
   },
   "devDependencies": {
@@ -49,7 +53,6 @@
     "@typescript-eslint/utils": "8.37.0",
     "angular-eslint": "20.1.1",
     "autoprefixer": "10.4.21",
-    "daisyui": "5.0.46",
     "eslint": "9.31.0",
     "eslint-config-prettier": "10.1.7",
     "jest": "29.7.0",
