@@ -1,34 +1,34 @@
 {
-  "name": "todo",
+  "name": "client",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "cva",
-  "sourceRoot": "apps/todo/src",
+  "sourceRoot": "apps/client/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/todo",
-        "browser": "apps/todo/src/main.ts",
+        "outputPath": "dist/apps/client",
+        "browser": "apps/client/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/todo/tsconfig.app.json",
+        "tsConfig": "apps/client/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/todo/public"
+            "input": "apps/client/public"
           }
         ],
-        "styles": ["apps/todo/src/styles.css"],
-        "plugins": ["apps/todo/plugins/env-var-plugin.js"]
+        "styles": ["apps/client/src/styles.css"],
+        "plugins": ["apps/client/plugins/env-var-plugin.js"]
       },
       "configurations": {
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/todo/src/environments/environment.ts",
-              "with": "apps/todo/src/environments/environment.prod.ts"
+              "replace": "apps/client/src/environments/environment.ts",
+              "with": "apps/client/src/environments/environment.prod.ts"
             }
           ],
           "budgets": [
@@ -58,10 +58,10 @@
       "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "todo:build:production"
+          "buildTarget": "client:build:production"
         },
         "development": {
-          "buildTarget": "todo:build:development"
+          "buildTarget": "client:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -69,7 +69,7 @@
     "extract-i18n": {
       "executor": "@nx/angular:extract-i18n",
       "options": {
-        "buildTarget": "todo:build"
+        "buildTarget": "client:build"
       }
     },
     "lint": {
@@ -79,15 +79,15 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/todo/jest.config.ts"
+        "jestConfig": "apps/client/jest.config.ts"
       }
     },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "todo:build",
-        "staticFilePath": "dist/apps/todo/browser",
+        "buildTarget": "client:build",
+        "staticFilePath": "dist/apps/client/browser",
         "spa": true
       }
     }

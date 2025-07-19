@@ -8,7 +8,7 @@ export const listTodos = query({
   },
   handler: async (ctx, args) => {
     const { count } = args;
-    return await ctx.db.query('todos').take(count);
+    return await ctx.db.query('todos').order('desc').take(count);
   },
 });
 
@@ -29,6 +29,26 @@ export const reopenTodo = mutation({
   handler: async (ctx, args) => {
     const { id } = args;
     await ctx.db.patch(id, { completed: false });
+  },
+});
+
+export const addTodo = mutation({
+  args: {
+    title: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { title } = args;
+    await ctx.db.insert('todos', { title, description: '', completed: false });
+  },
+});
+
+export const deleteTodo = mutation({
+  args: {
+    id: v.id('todos'),
+  },
+  handler: async (ctx, args) => {
+    const { id } = args;
+    await ctx.db.delete(id);
   },
 });
 
