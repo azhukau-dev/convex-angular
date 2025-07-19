@@ -10,6 +10,14 @@ The Angular client for Convex.
 1. Install the dependencies:
 
 ```bash
+pnpm add convex convex-angular
+```
+
+```bash
+yarn add convex convex-angular
+```
+
+```bash
 npm install convex convex-angular
 ```
 

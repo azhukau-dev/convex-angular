@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev:frontend": "nx serve client",
+    "dev:frontend": "nx serve frontend",
     "dev:backend": "convex dev",
-    "build:frontend": "nx build client",
+    "build:frontend": "nx build frontend",
     "build:library": "nx build convex-angular",
     "update": "nx migrate latest"
   },
