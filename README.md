@@ -3,19 +3,19 @@
 The Angular client for Convex.
 
 [![NPM version](https://img.shields.io/npm/v/convex-angular?color=limegreen&label=npm)](https://www.npmjs.com/package/convex-angular)
+[![GitHub license](https://img.shields.io/badge/license-MIT-limegreen.svg)](https://github.com/azhukau-dev/convex-angular/blob/main/LICENSE)
 [![NPM downloads](https://img.shields.io/npm/dm/convex-angular?color=limegreen&label=downloads)](https://www.npmjs.com/package/convex-angular)
 
-## Getting Started
+## 🧩 Features
+
+- 🔌 Core providers: `injectQuery`, `injectMutation`, `injectAction`, and `injectConvex`
+- 📡 Signal Integration: [Angular Signals](https://angular.dev/guide/signals) for reactive state
+- 🛡️ Error Handling: Built-in error states and loading
+- 🧹 Auto Cleanup: Automatic lifecycle management
+
+## 🚀 Getting Started
 
 1. Install the dependencies:
-
-```bash
-pnpm add convex convex-angular
-```
-
-```bash
-yarn add convex convex-angular
-```
 
 ```bash
 npm install convex convex-angular
@@ -31,11 +31,9 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-3. That's it! You can now use the injection providers in your app.
+3. 🎉 That's it! You can now use the injection providers in your app.
 
-## Usage
-
-> **Note:** All injection providers in `convex-angular` (`injectQuery`, `injectMutation`, `injectAction`) - are built on top of [Angular Signals](https://angular.dev/essentials/signals). As a result, they return reactive signals, providing fine-grained reactivity and smooth integration with Angular's change detection.
+## 📖 Usage
 
 ### Fetching data
 
@@ -95,10 +93,30 @@ export class AppComponent {
 }
 ```
 
-## Contributing
+### Using the Convex client
+
+Use `injectConvex` to get full flexibility of the Convex client.
+
+```typescript
+import { injectConvex } from 'convex-angular';
+
+@Component({
+  selector: 'app-root',
+  template: `<button (click)="completeAllTodos()">Complete All Todos</button>`,
+})
+export class AppComponent {
+  readonly convex = injectConvex();
+
+  completeAllTodos() {
+    this.convex.mutation(api.todoFunctions.completeAllTodos, {});
+  }
+}
+```
+
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a pull request.
 
-## License
+## ⚖️ License
 
 [MIT](https://github.com/azhukau-dev/convex-angular/blob/main/LICENSE)
