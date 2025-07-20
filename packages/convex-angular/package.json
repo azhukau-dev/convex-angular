@@ -1,6 +1,6 @@
 {
   "name": "convex-angular",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The Angular client for Convex",
   "keywords": [
     "angular",
@@ -17,8 +17,9 @@
     "name": "Aliaksandr Zhukau"
   },
   "peerDependencies": {
-    "@angular/core": "^20.1.0",
+    "@angular/core": ">=20.0.0",
     "convex": "^1.25.4"
   },
   "sideEffects": false
 }
+
